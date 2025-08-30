@@ -1,0 +1,10 @@
+# Ignorar arquivos de build
+target/
+
+# Ignorar arquivos temporários
+*.log
+*.tmp
+
+# Ignorar arquivos do sistema
+.DS_Store
+Thumbs.db
