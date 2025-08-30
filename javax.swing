@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+public class BoardGUI {
+    private static ArrayList<String> tasks = new ArrayList<>();
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Board de Tarefas");
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        JList<String> taskList = new JList<>(listModel);
+        JTextField input = new JTextField(20);
+        JButton addBtn = new JButton("Adicionar");
+        JButton removeBtn = new JButton("Remover");
+
+        addBtn.addActionListener(e -> {
+            String task = input.getText();
+            if (!task.isEmpty()) {
+                tasks.add(task);
+                listModel.addElement(task);
+                input.setText("");
+            }
+        });
+
+        removeBtn.addActionListener(e -> {
+            int index = taskList.getSelectedIndex();
+            if (index >= 0) {
+                tasks.remove(index);
+                listModel.remove(index);
+            }
+        });
+
+        JPanel panel = new JPanel();
+        panel.add(input);
+        panel.add(addBtn);
+        panel.add(removeBtn);
+        panel.add(new JScrollPane(taskList));
+
+        frame.setContentPane(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
